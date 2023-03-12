@@ -1,0 +1,105 @@
+<.section class="mt-6 xl:mt-0 px-6 xl:px-0">
+  <h1 class="font-manrope font-extrabold text-3xl xl:text-4xl text-primary xl:mb-12 mb-6">
+    Elza
+  </h1>
+
+  <div
+    class="flex flex-col xl:flex-row gap-x-32"
+    x-data="{isMobile: $isBreakpoint('lg-')}"
+    x-on:resize.window="isMobile = $isBreakpoint('lg-')"
+  >
+    <template x-if="!isMobile">
+      <div class="flex flex-col gap-y-2 min-w-[854px]">
+        <img class="w-[854px]" src={~p"/images/elza-big.png"} />
+        <div class="flex gap-x-2">
+          <%= for _ <- 1..10 do %>
+            <img class="w-18 h-11" src={~p"/images/cat-mini.png"} />
+          <% end %>
+        </div>
+      </div>
+    </template>
+
+    <template x-if="isMobile">
+      <div class="mb-6">
+        <img class="w-[280px]" src={~p"/images/elza-medium.png"} />
+      </div>
+    </template>
+
+    <div class="flex flex-col xl:space-y-6 space-y-4">
+      <h2 class="font-manrope font-bold xl:font-extrabold text-xl xl:text-3xl">
+        Informacje o kocie
+      </h2>
+
+      <ul class="flex flex-col gap-y-4 font-bold font-manrope xl:text-xl">
+        <li class="flex align-center gap-x-4"><.icon name="gender" class="xl:w-5" />Kotka</li>
+        <li class="flex align-center gap-x-4"><.icon name="paw" class="xl:w-5" />Dorosły</li>
+        <li class="flex align-center gap-x-4">
+          <.icon name="sthetoscope" class="xl:w-5" />Przebadany i zaszczepiony
+        </li>
+        <li class="flex align-center gap-x-4">
+          <.icon name="scissors" class="xl:w-5" />Po kastracji
+        </li>
+        <li class="flex align-center gap-x-4"><.icon name="ekg" class="xl:w-5" />Zdrowy</li>
+        <li class="flex align-center gap-x-4">
+          <.icon name="medicine" class="xl:w-3 mx-1" />Testy FIV/FELV ujemne
+        </li>
+      </ul>
+
+      <div class="flex flex-row flex-wrap gap-x-2 gap-y-5 xl:gap-y-8 w-2/3 xl:w-auto">
+        <%= for text <- ["Żywiołowy", "Lubi zabawę", "Słodki", "Wielbiciel kolan", "Wesoły", "Otwarty na ludzi"] do %>
+          <div class="w-auto h-auto">
+            <.card_tag><%= text %></.card_tag>
+          </div>
+        <% end %>
+      </div>
+      <.button href="#">Udostępnij znajomym</.button>
+    </div>
+  </div>
+
+  <div class="xl:mt-14 mt-6 flex flex-col-reverse xl:flex-row gap-x-32 gap-y-4">
+    <div class="xl:w-[854px] mt-6 xl:mt-0">
+      <h3 class="font-manrope font-bold text-2xl">
+        Księżniczka Elza podbije serce każdego człowieka.
+        Wesoła koteczka, zawsze chętna do psot i zabawy.
+      </h3>
+
+      <p class="text-lg">
+        Elza jest uroczą koteczką o pięknym biało-grafitowym umaszczeniu.
+        Jak na swoje ok 9 miesięcy i żeńską płeć jest dość duża.
+        Jest bardzo przyjacielska i lubi być blisko człowieka ale nie jest przy tym nachalna.
+        Kotusia wyraźnie potrafi pokazać gdzie leżą granice jej kociej przestrzeni, której nie należy naruszać.
+        Elza uwielbia bawić się zarówno sama jak i z człowiekiem.
+        Koteczka jest odrobaczona, zaszczepiona i wysterylizowana.
+        Posiada książeczkę zdrowia. Wzorowo korzysta z kuwety i nie sprawia problemów.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-y-4">
+      <h2 class="font-manrope font-bold xl:text-2xl text-xl">Interesuje Cię adopcja?</h2>
+      <p class="text-lg">
+        Wypełnij
+        <a href="#" class="text-primary font-bold underline underline-offset-4">
+          ankietę adopcyjną
+        </a>
+      </p>
+      <p class="text-lg">Kotem opiekuje się <b>Agnieszka</b></p>
+      <h4 class="text-primary font-bold text-lg">Telefon do opiekuna</h4>
+      <div class="flex space-x-2">
+        <.button
+          href="#"
+          type="outline"
+          class="!px-4 !py-1.5 text-black font-normal xl:text-sm flex gap-x-1.5 align-center"
+        >
+          <.icon name="telephone" /><span>123 456 789</span>
+        </.button>
+        <.button
+          href="#"
+          type="outline"
+          class="!px-4 !py-1.5 text-black font-normal xl:text-sm flex gap-x-1.5 align-center"
+        >
+          <.icon name="telephone" /><span>123 456 789</span>
+        </.button>
+      </div>
+    </div>
+  </div>
+</.section>
