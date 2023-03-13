@@ -1,5 +1,3 @@
 defmodule Kotkowo.Repo do
-  use Ecto.Repo,
-    otp_app: :kotkowo,
-    adapter: Ecto.Adapters.Postgres
+  use AshPostgres.Repo, otp_app: :kotkowo
 end

@@ -62,7 +62,8 @@ defmodule Kotkowo.MixProject do
       {:gradient, github: "esl/gradient", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
-      {:ash, "~> 2.6.20"}
+      {:ash, "~> 2.6.20"},
+      {:ash_postgres, "~> 1.3.6"}
     ]
   end
 
