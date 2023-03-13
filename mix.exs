@@ -63,7 +63,9 @@ defmodule Kotkowo.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
       {:ash, "~> 2.6.20"},
-      {:ash_postgres, "~> 1.3.6"}
+      {:ash_postgres, "~> 1.3.6"},
+      {:ash_graphql, "~> 0.22.4"},
+      {:absinthe_plug, "~> 1.5"}
     ]
   end
 

@@ -14,6 +14,15 @@ defmodule KotkowoWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/" do
+    forward "/gql", Absinthe.Plug, schema: Kotkowo.Schema
+
+    forward "/playground",
+            Absinthe.Plug.GraphiQL,
+            schema: Kotkowo.Schema,
+            interface: :playground
+  end
+
   scope "/", KotkowoWeb do
     pipe_through :browser
 
@@ -33,6 +42,7 @@ defmodule KotkowoWeb.Router do
       get "/szukaja-domu", PageController, :looking_for_new_home
       get "/szukaja-domu/:id", PageController, :cat_adoption
     end
+
   end
 
   # Other scopes may use custom stacks.

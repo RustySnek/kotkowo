@@ -1,5 +1,22 @@
 defmodule Kotkowo.Adoption.Cat do
-  use Ash.Resource, data_layer: AshPostgres.DataLayer
+  use Ash.Resource, data_layer: AshPostgres.DataLayer, extensions: [
+    AshGraphql.Resource
+  ]
+
+  graphql do
+    type :cat
+
+    queries do
+      get :get_cat, :read
+      list :list_cats, :read
+    end
+
+    mutations do
+      create :create_cat, :create
+      update :update_cat, :update
+      destroy :destroy_cat, :destroy
+    end
+  end
 
   postgres do
     table "cats"
