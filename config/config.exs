@@ -10,6 +10,9 @@ import Config
 config :kotkowo,
   ecto_repos: [Kotkowo.Repo]
 
+# Ash APIs
+config :kotkowo, :ash_apis, [Kotkowo.Adoption]
+
 # Configures the endpoint
 config :kotkowo, KotkowoWeb.Endpoint,
   url: [host: "localhost"],
