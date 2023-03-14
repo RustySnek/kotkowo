@@ -10,7 +10,7 @@ defmodule Kotkowo.Adoption.Cat do
 
     queries do
       get(:get_cat, :read)
-      list(:all_cats, :read)
+      list(:list_cat, :list)
     end
 
     mutations do
@@ -27,6 +27,14 @@ defmodule Kotkowo.Adoption.Cat do
 
   actions do
     defaults [:create, :read, :update, :destroy]
+
+    read :list do
+      pagination do
+        offset? true
+        countable true
+        max_page_size 50
+      end
+    end
   end
 
   attributes do
