@@ -6,7 +6,8 @@ defmodule Kotkowo.Adoption.Registry do
     ]
 
   graphql do
-    authorize? false # Defaults to `true`, use this to disable authorization for the entire API (you probably only want this while prototyping)
+    # Defaults to `true`, use this to disable authorization for the entire API (you probably only want this while prototyping)
+    authorize?(false)
   end
 
   entries do

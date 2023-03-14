@@ -1,14 +1,16 @@
 defmodule Kotkowo.Adoption.Cat do
-  use Ash.Resource, data_layer: AshPostgres.DataLayer, extensions: [
-    AshGraphql.Resource
-  ]
+  use Ash.Resource,
+    data_layer: AshPostgres.DataLayer,
+    extensions: [
+      AshGraphql.Resource
+    ]
 
   graphql do
     type :cat
 
     queries do
-      get :get_cat, :read
-      list :list_cats, :read
+      get(:get_cat, :read)
+      list(:all_cats, :read)
     end
 
     mutations do
@@ -35,27 +37,19 @@ defmodule Kotkowo.Adoption.Cat do
     end
 
     attribute :sex, :atom do
-      constraints [
-        one_of: [:male, :female]
-      ]
+      constraints one_of: [:male, :female]
     end
 
     attribute :age, :atom do
-      constraints [
-        one_of: [:junior, :senior]
-      ]
+      constraints one_of: [:junior, :senior]
     end
 
     attribute :fiv_felv_status, :atom do
-      constraints [
-        one_of: [:both_negative, :both_positive]
-      ]
+      constraints one_of: [:both_negative, :both_positive]
     end
 
     attribute :health_status, :atom do
-      constraints [
-        one_of: [:healthy, :sick]
-      ]
+      constraints one_of: [:healthy, :sick]
     end
 
     attribute :castrated, :boolean
