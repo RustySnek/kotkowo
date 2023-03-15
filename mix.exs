@@ -66,7 +66,8 @@ defmodule Kotkowo.MixProject do
       {:ash_postgres, "~> 1.3.6"},
       {:ash_graphql, "~> 0.22.4"},
       {:absinthe_plug, "~> 1.5"},
-      {:corsica, "~> 1.3"}
+      {:corsica, "~> 1.3"},
+      {:ash_authentication, "~> 3.10.2"}
     ]
   end
 
