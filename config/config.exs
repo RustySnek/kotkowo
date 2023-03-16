@@ -11,7 +11,7 @@ config :kotkowo,
   ecto_repos: [Kotkowo.Repo]
 
 # Ash APIs
-config :kotkowo, :ash_apis, [Kotkowo.Adoption]
+config :kotkowo, :ash_apis, [Kotkowo.Adoption, Kotkowo.Accounts]
 
 # Configures the endpoint
 config :kotkowo, KotkowoWeb.Endpoint,
