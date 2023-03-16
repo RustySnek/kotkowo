@@ -16,6 +16,8 @@ defmodule Kotkowo.Application do
       {Phoenix.PubSub, name: Kotkowo.PubSub},
       # Start Finch
       {Finch, name: Kotkowo.Finch},
+      # Start AshAuthentication
+      {AshAuthentication.Supervisor, otp_app: :my_app},
       # Start the Endpoint (http/https)
       KotkowoWeb.Endpoint
       # Start a worker by calling: Kotkowo.Worker.start_link(arg)

@@ -1,7 +1,7 @@
 defmodule Kotkowo.Schema do
   use Absinthe.Schema
 
-  @apis [Kotkowo.Adoption]
+  @apis [Kotkowo.Adoption, Kotkowo.Accounts]
 
   use AshGraphql, apis: @apis
 

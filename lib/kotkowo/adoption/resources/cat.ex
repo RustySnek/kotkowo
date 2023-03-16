@@ -3,6 +3,9 @@ defmodule Kotkowo.Adoption.Cat do
     data_layer: AshPostgres.DataLayer,
     extensions: [
       AshGraphql.Resource
+    ],
+    authorizers: [
+      Ash.Policy.Authorizer
     ]
 
   graphql do

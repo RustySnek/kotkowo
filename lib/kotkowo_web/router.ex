@@ -1,6 +1,8 @@
 defmodule KotkowoWeb.Router do
   use KotkowoWeb, :router
 
+  import KotkowoWeb.AuthPlug, only: [load_from_bearer: 2, set_actor: 2]
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -12,9 +14,15 @@ defmodule KotkowoWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+
+    plug :load_from_bearer
+    plug :set_actor, :user
+    plug AshGraphql.Plug
   end
 
   scope "/" do
+    pipe_through :api
+
     forward "/gql", Absinthe.Plug, schema: Kotkowo.Schema
 
     forward "/playground",
