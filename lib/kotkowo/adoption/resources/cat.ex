@@ -26,6 +26,12 @@ defmodule Kotkowo.Adoption.Cat do
       list(:list_cat, :list)
     end
 
+    managed_relationships do
+      managed_relationship(:create_cat, :images,
+        types: [temporary_base64: :string, url: :string, sizes: {:array, :string}]
+      )
+    end
+
     mutations do
       create :create_cat, :create
       update :update_cat, :update
@@ -39,7 +45,13 @@ defmodule Kotkowo.Adoption.Cat do
   end
 
   actions do
-    defaults [:create, :read, :update, :destroy]
+    defaults [:read, :update, :destroy]
+
+    create :create do
+      argument :images, {:array, :string}
+
+      change {Kotkowo.Adoption.Changes.CatChange, []}
+    end
 
     read :list do
       pagination do
@@ -71,6 +83,15 @@ defmodule Kotkowo.Adoption.Cat do
 
     attribute :health_status, :atom do
       constraints one_of: [:healthy, :sick]
+    end
+
+    relationships do
+      many_to_many :images, Kotkowo.Images.Image do
+        api Kotkowo.Images
+        through Kotkowo.Images.CatImage
+        source_attribute_on_join_resource :cat_id
+        destination_attribute_on_join_resource :image_id
+      end
     end
 
     attribute :castrated, :boolean
