@@ -8,6 +8,16 @@ defmodule Kotkowo.Adoption.Cat do
       Ash.Policy.Authorizer
     ]
 
+  policies do
+    policy action_type(:read) do
+      authorize_if always()
+    end
+
+    policy always() do
+      authorize_if actor_present()
+    end
+  end
+
   graphql do
     type :cat
 

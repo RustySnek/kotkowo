@@ -13,10 +13,10 @@ defmodule KotkowoWeb.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
-
     plug :load_from_bearer
     plug :set_actor, :user
+
+    plug :accepts, ["json"]
     plug AshGraphql.Plug
   end
 
