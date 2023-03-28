@@ -34,6 +34,20 @@ services:
       - kotkowo-postgres
     restart: unless-stopped
 
+  kotkowo-minio:
+    container_name: kotkowo_minio_container
+    image: minio/minio
+    environment:
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: root12345
+    volumes:
+      - kotkowo-minio:/data
+    ports:
+      - "9001:9001"
+      - "9000:9000"
+    command: |
+      minio server /data --console-address ":9001"
+
 networks:
   kotkowo-postgres:
     driver: bridge
@@ -41,3 +55,4 @@ networks:
 volumes:
     kotkowo-postgres:
     kotkowo-pgadmin:
+    kotkowo-minio:
