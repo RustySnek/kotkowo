@@ -36,3 +36,4 @@ npm-debug.log
 /.nix-mix/
 /.direnv/
 /.nix-hex/
+.envrc
