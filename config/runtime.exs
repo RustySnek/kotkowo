@@ -20,6 +20,22 @@ if System.get_env("PHX_SERVER") do
   config :kotkowo, KotkowoWeb.Endpoint, server: true
 end
 
+access_key_id = System.get_env("AWS_ACCESS_KEY")
+secret_access_key = System.get_env("AWS_SECRET_KEY")
+
+config :ex_aws,
+  access_key_id: access_key_id,
+  secret_access_key: secret_access_key
+
+config :ex_aws, :s3,
+  scheme: "http://",
+  host: "localhost",
+  port: 9000,
+  secure: false,
+  credentials_provider:
+    {ExAws.Credentials.Static,
+     %{access_key_id: access_key_id, secret_access_key: secret_access_key}}
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
