@@ -31,6 +31,8 @@ config :kotkowo, KotkowoWeb.Endpoint,
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
+config :ash, :policies, log_policy_breakdowns: :error
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

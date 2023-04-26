@@ -1,4 +1,4 @@
-defmodule Kotkowo.Repo.Migrations.AddUsersAndTokens do
+defmodule Kotkowo.Repo.Migrations.InitialMigrations do
   @moduledoc """
   Updates resources based on their most recent snapshots.
 
@@ -26,15 +26,37 @@ defmodule Kotkowo.Repo.Migrations.AddUsersAndTokens do
       add :jti, :text, null: false, primary_key: true
     end
 
-    alter table(:cats) do
-      modify :id, :uuid, default: fragment("uuid_generate_v4()")
+    create table(:cats, primary_key: false) do
+      add :id, :uuid, null: false, default: fragment("uuid_generate_v4()"), primary_key: true
+      add :name, :text, null: false
+      add :sex, :text
+      add :age, :text
+      add :fiv_felv_status, :text
+      add :health_status, :text
+      add :castrated, :boolean
+    end
+
+    create table(:cat_images, primary_key: false) do
+      add :id, :uuid, null: false, default: fragment("uuid_generate_v4()"), primary_key: true
+      add :filename, :text
+
+      add :cat_id,
+          references(:cats,
+            column: :id,
+            name: "cat_images_cat_id_fkey",
+            type: :uuid,
+            prefix: "public"
+          ),
+          null: false
     end
   end
 
   def down do
-    alter table(:cats) do
-      modify :id, :uuid, default: nil
-    end
+    drop constraint(:cat_images, "cat_images_cat_id_fkey")
+
+    drop table(:cat_images)
+
+    drop table(:cats)
 
     drop table(:tokens)
 

@@ -17,39 +17,40 @@
       "primary_key?": false,
       "references": null,
       "size": null,
-      "source": "temporary_base64",
+      "source": "filename",
       "type": "text"
     },
     {
-      "allow_nil?": true,
+      "allow_nil?": false,
       "default": "nil",
       "generated?": false,
       "primary_key?": false,
-      "references": null,
+      "references": {
+        "destination_attribute": "id",
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null,
+        "multitenancy": {
+          "attribute": null,
+          "global": null,
+          "strategy": null
+        },
+        "name": "cat_images_cat_id_fkey",
+        "on_delete": null,
+        "on_update": null,
+        "schema": "public",
+        "table": "cats"
+      },
       "size": null,
-      "source": "url",
-      "type": "text"
-    },
-    {
-      "allow_nil?": true,
-      "default": "nil",
-      "generated?": false,
-      "primary_key?": false,
-      "references": null,
-      "size": null,
-      "source": "sizes",
-      "type": [
-        "array",
-        "text"
-      ]
+      "source": "cat_id",
+      "type": "uuid"
     }
   ],
   "base_filter": null,
   "check_constraints": [],
   "custom_indexes": [],
   "custom_statements": [],
-  "has_create_action": false,
-  "hash": "2B084E7AF6677E7C7EE0B26EDB010F680651CD43EAC98BE73F0D11DF88190A19",
+  "has_create_action": true,
+  "hash": "0880E2E6806B6B4C17D7A05170CE3D70A407B65AC82893762AE96759DD3FAE22",
   "identities": [],
   "multitenancy": {
     "attribute": null,
@@ -58,5 +59,5 @@
   },
   "repo": "Elixir.Kotkowo.Repo",
   "schema": null,
-  "table": "images"
+  "table": "cat_images"
 }

@@ -12,9 +12,8 @@ defmodule Kotkowo.Adoption.Cat do
     policy action_type(:read) do
       authorize_if always()
     end
-
     policy always() do
-      authorize_if actor_present()
+      authorize_if always()
     end
   end
 
@@ -29,6 +28,7 @@ defmodule Kotkowo.Adoption.Cat do
     mutations do
       create :create_cat, :create
       update :update_cat, :update
+      update :set_images_cat, :set_images
       destroy :destroy_cat, :destroy
     end
   end
@@ -39,15 +39,38 @@ defmodule Kotkowo.Adoption.Cat do
   end
 
   actions do
-    defaults [:create, :read, :update, :destroy]
+    defaults [:create, :read, :destroy, :update]
+
+    update :set_images do
+      accept []
+
+      argument :images, {:array, :map}, allow_nil?: false
+
+      change manage_relationship(:images, :images, type: :direct_control)
+    end
 
     read :list do
+      # prepare build(load: [images: :url])
       pagination do
         offset? true
         countable true
         max_page_size 50
       end
     end
+
+    read :get do
+      get? true
+      get_by :id
+    end
+  end
+
+  code_interface do
+    define_for Kotkowo.Adoption
+    define :get, action: :get, args: [:id], get?: true
+  end
+
+  relationships do
+    has_many :images, Kotkowo.Images.CatImage, api: Kotkowo.Images
   end
 
   attributes do

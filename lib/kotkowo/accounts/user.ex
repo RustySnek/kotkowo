@@ -48,6 +48,11 @@ defmodule Kotkowo.Accounts.User do
     end
   end
 
+  code_interface do
+    define_for Kotkowo.Accounts
+    define :register, action: :register_with_password, args: [:email, :password, :password_confirmation]
+  end
+
   authentication do
     api Kotkowo.Accounts
 

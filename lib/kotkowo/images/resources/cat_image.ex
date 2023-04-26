@@ -5,9 +5,21 @@ defmodule Kotkowo.Images.CatImage do
     authorizers: [Ash.Policy.Authorizer]
 
   policies do
+    bypass actor_present() do
+      authorize_if always()
+    end
+
+    policy action_type(:read) do
+      authorize_if always()
+    end
+
     policy always() do
       authorize_if always()
     end
+  end
+
+  graphql do
+    type :cat_image
   end
 
   postgres do
@@ -19,19 +31,22 @@ defmodule Kotkowo.Images.CatImage do
     defaults [:create, :read, :update, :destroy]
   end
 
+  calculations do
+    calculate :url, :string, {Calculations.S3Upload, [segments: [:cat_id, :id], bucket: "images"]}
+
+    calculate :upload_url,
+              :string,
+              {Calculations.S3Upload, [segments: [:cat_id, :id], bucket: "images", write: true]}
+  end
+  
   attributes do
     uuid_primary_key :id
+
+    attribute :filename, :string
 
     relationships do
       belongs_to :cat, Kotkowo.Adoption.Cat do
         api Kotkowo.Adoption
-        primary_key? true
-        allow_nil? false
-      end
-
-      belongs_to :image, Kotkowo.Images.Image do
-        api Kotkowo.Images
-        primary_key? true
         allow_nil? false
       end
     end
