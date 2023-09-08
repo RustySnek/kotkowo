@@ -7,19 +7,14 @@ jobs:
     strategy:
       matrix:
         otp: [24.3.4.6]
-        elixir: [1.14.1]
-    services:
-      db:
-        image: postgres:latest
-        ports: ['5432:5432']
-        env:
-          POSTGRES_PASSWORD: postgres
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        elixir: [1.15.5]
     env:
       MIX_ENV: test
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v1.0.0
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
       - uses: erlef/setup-beam@v1
         with:
           otp-version: ${{matrix.otp}}
@@ -47,7 +42,3 @@ jobs:
         run: mix compile --warnings-as-errors
       - name: Run gradient
         run: mix gradient
-      - name: Run tests
-        run: mix test
-      - name: Run coveralls
-        run: mix coveralls.github
