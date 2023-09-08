@@ -10,13 +10,8 @@ defmodule Kotkowo.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
-        check: :test,
-        coveralls: :test,
-        "coveralls.detail": :test,
-        "coveralls.post": :test,
-        "coveralls.html": :test
+        check: :test
       ]
     ]
   end
@@ -55,8 +50,7 @@ defmodule Kotkowo.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:styler, "~> 0.8", only: [:dev, :test], runtime: false},
       {:gradient, github: "esl/gradient", only: [:dev, :test], runtime: false},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 
